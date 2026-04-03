@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essência Astral</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #0a0a1a;
+            color: #e8e0ff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #c9a0ff;
+            text-align: center;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+
+        .subtitulo {
+            color: #9b7fd4;
+            text-align: center;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .card {
+            background: #13132b;
+            border: 1px solid #3a2d6e;
+            border-radius: 16px;
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .pergunta {
+            margin-bottom: 20px;
+        }
+
+        .pergunta label {
+            display: block;
+            color: #c9a0ff;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .opcoes {
+            display: flex;
+            gap: 12px;
+        }
+
+        .opcoes button {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #3a2d6e;
+            border-radius: 8px;
+            background: #1a1a35;
+            color: #e8e0ff;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .opcoes button.selecionado {
+            background: #3a2d6e;
+            border-color: #c9a0ff;
+            color: #fff;
+        }
+
+        .opcoes button:hover {
+            border-color: #c9a0ff;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #3a2d6e;
+            border-radius: 8px;
+            background: #1a1a35;
+            color: #e8e0ff;
+            font-size: 0.95rem;
+        }
+
+        .btn-revelar {
+            width: 100%;
+            padding: 16px;
+            margin-top: 30px;
+            background: linear-gradient(135deg, #6a3fa0, #3a2d6e);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-revelar:hover { opacity: 0.85; }
+
+        .resultado {
+            display: none;
+            margin-top: 30px;
+            text-align: center;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #3a2d6e;
+            background: #0f0f25;
+        }
+
+        .resultado .emoji { font-size: 3rem; margin-bottom: 10px; }
+        .resultado .elemento-nome {
+            font-size: 1.8rem;
+            color: #c9a0ff;
+            margin-bottom: 16px;
+        }
+        .resultado .descricao {
+            color: #b0a0d4;
+            font-style: italic;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Essência Astral</h1>
+    <p class="subtitulo">Descubra qual elemento astrológico revela a sua essência astral!</p>
+
+    <div class="card">
+
+        <div class="pergunta">
+            <label>Você é uma pessoa extrovertida?</label>
+            <div class="opcoes">
+                <button onclick="selecionar(this, 'extrovertido', 1)">Sim</button>
+                <button onclick="selecionar(this, 'extrovertido', 0)">Não</button>
+            </div>
+        </div>
+
+        <div class="pergunta">
+            <label>Você age mais pelo coração do que pela razão?</label>
+            <div class="opcoes">
+                <button onclick="selecionar(this, 'emocional', 1)">Sim</button>
+                <button onclick="selecionar(this, 'emocional', 0)">Não</button>
+            </div>
+        </div>
+
+        <div class="pergunta">
+            <label>Você prefere analisar antes de decidir?</label>
+            <div class="opcoes">
+                <button onclick="selecionar(this, 'logico', 1)">Sim</button>
+                <button onclick="selecionar(this, 'logico', 0)">Não</button>
+            </div>
+        </div>
+
+        <div class="pergunta">
+            <label>Você se considera uma pessoa criativa?</label>
+            <div class="opcoes">
+                <button onclick="selecionar(this, 'criativo', 1)">Sim</button>
+                <button onclick="selecionar(this, 'criativo', 0)">Não</button>
+            </div>
+        </div>
+
+        <div class="pergunta">
+            <label>Você costuma agir por impulso?</label>
+            <div class="opcoes">
+                <button onclick="selecionar(this, 'impulsivo', 1)">Sim</button>
+                <button onclick="selecionar(this, 'impulsivo', 0)">Não</button>
+            </div>
+        </div>
+
+        <div class="pergunta">
+            <label>Você é uma pessoa paciente?</label>
+            <div class="opcoes">
+                <button onclick="selecionar(this, 'paciente', 1)">Sim</button>
+                <button onclick="selecionar(this, 'paciente', 0)">Não</button>
+            </div>
+        </div>
+
+        <div class="pergunta">
+            <label>Você se comunica com facilidade?</label>
+            <div class="opcoes">
+                <button onclick="selecionar(this, 'comunicativo', 1)">Sim</button>
+                <button onclick="selecionar(this, 'comunicativo', 0)">Não</button>
+            </div>
+        </div>
+
+        <div class="pergunta">
+            <label>Você confia muito na sua intuição?</label>
+            <div class="opcoes">
+                <button onclick="selecionar(this, 'intuitivo', 1)">Sim</button>
+                <button onclick="selecionar(this, 'intuitivo', 0)">Não</button>
+            </div>
+        </div>
+
+        <div class="pergunta">
+            <label>Qual é o seu mês de nascimento?</label>
+            <select id="mes_nascimento">
+                <option value="">Selecione...</option>
+                <option value="1">Janeiro</option>
+                <option value="2">Fevereiro</option>
+                <option value="3">Março</option>
+                <option value="4">Abril</option>
+                <option value="5">Maio</option>
+                <option value="6">Junho</option>
+                <option value="7">Julho</option>
+                <option value="8">Agosto</option>
+                <option value="9">Setembro</option>
+                <option value="10">Outubro</option>
+                <option value="11">Novembro</option>
+                <option value="12">Dezembro</option>
+            </select>
+        </div>
+
+        <button class="btn-revelar" onclick="revelar()">Revelar meu elemento</button>
+
+        <div class="resultado" id="resultado">
+            <div class="emoji" id="emoji"></div>
+            <div class="elemento-nome" id="elemento-nome"></div>
+            <div class="descricao" id="descricao"></div>
+        </div>
+
+    </div>
+
+    <script>
+        const respostas = {};
+        const emojis = { Fogo: '🔥', Terra: '🌍', Ar: '💨', Agua: '💧' };
+
+        function selecionar(btn, campo, valor) {
+            respostas[campo] = valor;
+            const grupo = btn.parentElement.querySelectorAll('button');
+            grupo.forEach(b => b.classList.remove('selecionado'));
+            btn.classList.add('selecionado');
+        }
+
+        async function revelar() {
+            const campos = ['extrovertido','emocional','logico','criativo',
+                           'impulsivo','paciente','comunicativo','intuitivo'];
+            const mes = document.getElementById('mes_nascimento').value;
+
+            for (const campo of campos) {
+                if (respostas[campo] === undefined) {
+                    alert('Por favor, responda todas as perguntas!');
+                    return;
+                }
+            }
+            if (!mes) {
+                alert('Por favor, selecione seu mês de nascimento!');
+                return;
+            }
+
+            const payload = { ...respostas, mes_nascimento: parseInt(mes) };
+
+            try {
+                const resp = await fetch('http://127.0.0.1:5000/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await resp.json();
+
+                document.getElementById('emoji').textContent = emojis[data.elemento];
+                document.getElementById('elemento-nome').textContent = 
+                    'Seu elemento é ' + data.elemento;
+                document.getElementById('descricao').textContent = data.descricao;
+                document.getElementById('resultado').style.display = 'block';
+                document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
+
+            } catch (e) {
+                alert('Erro ao conectar com o servidor. Verifique se o back-end está rodando!');
+            }
+        }
+    </script>
+
+</body>
+</html>
